@@ -14,6 +14,6 @@ Todd has been an employee for 5 months and earns $3396 per month.
 Joe has been an employee for 9 months and earns $3573 per month.
 We order our output by ascending employee_id.
 
-//Oracle language
+//Mysql language
 
 select name from employee where salary > 2000 and months < 10  order by employee_id;
