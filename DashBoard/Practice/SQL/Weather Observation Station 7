@@ -1,0 +1,7 @@
+Query the list of CITY names ending with vowels (a, e, i, o, u) from STATION. Your result cannot contain duplicates.
+
+where LAT_N is the northern latitude and LONG_W is the western longitude.
+
+//Oracle Language
+
+SELECT distinct(CITY) FROM STATION where city like '%a' or city like '%e' or city like '%i' or city like '%o' or city like '%u';
