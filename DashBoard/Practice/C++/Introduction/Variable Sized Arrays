@@ -1,0 +1,31 @@
+Consider an n-element array,a, where each index i in the array contains a reference to an array of ki integers (where the value of ki varies from array to array). See the Explanation section below for a diagram.
+Given a, you must answer q queries. Each query is in the format i j, where i denotes an index in array a and j denotes an index in the array located at a[i].
+For each query, find and print the value of element j in the array at location a[i] on a new line.
+
+//c++ language
+
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+
+int main() {
+    int x,y,z,i,j;
+    cin>>x>>y;
+    vector<vector<int> >a(x);
+    for (i=0;i<x;++i){
+        cin>>z;
+        a[i].resize(z);
+        for(j=0;j<z;++j){
+            cin>>a[i][j];
+        }       
+    }
+    for(int l=0;l<y;++l){
+        cin >> i >> j;
+        cout << a[i][j]<<endl;
+    }   
+    return 0;
+}
