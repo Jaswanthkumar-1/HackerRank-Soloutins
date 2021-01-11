@@ -1,0 +1,50 @@
+C++ provides a nice alternative data type to manipulate strings, and the data type is conveniently called string. Some of its widely used features are the following:
+
+Declaration:
+
+string a = "abc";
+Size:
+
+int len = a.size();
+Concatenate two strings:
+
+string a = "abc";
+string b = "def";
+string c = a + b; // c = "abcdef".
+Accessing ith element:
+
+string s = "abc";
+char   c0 = s[0];   // c0 = 'a'
+char   c1 = s[1];   // c1 = 'b'
+char   c2 = s[2];   // c2 = 'c'
+
+s[0] = 'z';         // s = "zbc"
+P.S.: We will use cin/cout to read/write a string.
+
+//c++ language
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+int main() {
+string A,B,C;
+    char b,a;
+    int len1,len2;
+    cin>>A;
+    cin>>B;
+    len1 = A.size();
+    len2 = B.size();
+    cout<<len1;
+    cout<<" "<<len2;
+    C = A+B;
+    cout<<"\n"<<C;
+    a = B[0];
+    b = A[0];
+    A[0] = a;
+    B[0] = b;
+    cout<<"\n";
+    cout<<A;
+    cout<<" "<<B;
+    return 0;
+}
