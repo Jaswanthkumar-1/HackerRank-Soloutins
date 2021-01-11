@@ -1,0 +1,113 @@
+This challenge works with a custom-designed markup language HRML. In HRML, each element consists of a starting and ending tag, and there are attributes associated with each tag. Only starting tags can have attributes. We can call an attribute by referencing the tag, followed by a tilde, '~' and the name of the attribute. The tags may also be nested.
+
+The opening tags follow the format:
+
+<tag-name attribute1-name = "value1" attribute2-name = "value2" ...>
+
+The closing tags follow the format:
+
+</tag-name>
+
+The attributes are referenced as:
+
+tag1~value  
+tag1.tag2~name
+Given the source code in HRML format consisting of N lines, answer Q queries. For each query, print the value of the attribute specified. Print "Not Found!" if the attribute does not exist.
+
+Example
+
+HRML listing
+<tag1 value = "value">
+<tag2 name = "name">
+<tag3 another="another" final="final">
+</tag3>
+</tag2>
+</tag1>
+
+Queries
+tag1~value
+tag1.tag2.tag3~name
+tag1.tag2~value
+Here, tag2 is nested within tag1, so attributes of tag2 are accessed as tag1.tag2~<attribute>. Results of the queries are:
+
+Query                 Value
+tag1~value            "value"
+tag1.tag2.tag3~name   "Not Found!"
+tag1.tag2.tag3~final  "final"
+
+//c++ language
+
+#include <map>
+#include <vector>
+#include <iostream>
+#include <sstream>
+#include <string>
+using namespace std;
+
+
+map<string, map<string, string> > attribute;
+
+vector<string> splitbyspace(string s){
+    vector<string> result; 
+    istringstream iss(s); 
+    for(string s; iss >> s; )
+    result.push_back(s);
+
+    return result;
+}
+
+
+int main() {
+    int n,q;
+    cin >> n >> q;
+    string line[n];
+    cin.ignore(32767, '\n');
+    for(int i=0;i<n;i++)
+        getline(cin,line[i]);
+    vector<string> linesplited ;
+    vector<string> tag;
+    string key="";
+    for(int i=0;i<n;i++){
+        linesplited = splitbyspace(line[i]);
+        for(string s: linesplited){
+            if(s.substr(0,1) == "<" && s.substr(0,2) != "</"){
+                if(s.substr(s.length()-1) != ">")
+                tag.push_back(s.substr(1,s.length()-1));
+                else
+                tag.push_back(s.substr(1,s.length()-2));
+            }
+            else if (s.substr(0,2) == "</")
+            tag.pop_back();
+            else if (key == "") {
+            key = s;
+
+            }
+            else if(s != "="){
+                
+                map<string, string> temp;
+                string temps = "";
+                for(string t: tag)
+                    temps += t+".";
+                    temp = attribute[temps];
+                if(s.substr(s.length()-1) == ">")
+                temp[key] = s.substr(1,s.length()-3);
+                else
+                temp[key] = s.substr(1,s.length()-2);
+                attribute[temps] = temp;
+                key ="";
+            }
+        }
+    }
+
+    for(int i=0;i<q;i++){
+        string queryTag;
+        cin>> queryTag;
+        string queryKey = queryTag.substr(queryTag.find("~")+1);
+        queryTag = queryTag.substr(0,queryTag.find("~"))+".";
+        if(attribute[queryTag][queryKey] != "")
+        cout<< attribute[queryTag][queryKey] << endl;
+        else
+        cout<<"Not Found!"<<endl;        
+    }
+    return 0;
+}
