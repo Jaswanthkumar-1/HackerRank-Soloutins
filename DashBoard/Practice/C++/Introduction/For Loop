@@ -14,7 +14,7 @@ for(int i = 0; i < 10; i++) {
 }
 In this challenge, you will use a for loop to increment a variable through a range.
 
-//Mysql language
+//c++ language
 
 #include <iostream>
 #include <cstdio>
