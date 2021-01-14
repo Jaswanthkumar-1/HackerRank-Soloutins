@@ -1,0 +1,28 @@
+A class defines a blueprint for an object. We use the same syntax to declare objects of a class as we use to declare variables of other basic types. For example:
+
+Box box1;          // Declares variable box1 of type Box
+Box box2;          // Declare variable box2 of type Box
+Kristen is a contender for valedictorian of her high school. She wants to know how many students (if any) have scored higher than her in the  exams given during this semester.
+
+Create a class named  with the following specifications:
+
+//c++ language
+
+// Write your Student class here
+class Student {
+    private:
+    int scores[5];
+    public:
+    void input() {
+        for (int i = 0; i < 5; i++) {
+            cin >> scores[i];
+        }
+    }
+    int calculateTotalScore() {
+        int counter = 0;
+        for (int i = 0; i < 5; i++) {
+            counter += scores[i];
+        }
+        return counter;
+    }
+};
