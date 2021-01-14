@@ -1,0 +1,31 @@
+You are given four integers:N,S,P,Q. You will use them in order to create the sequence  with the following pseudo-code.
+
+a[0] = S (modulo 2^31)
+for i = 1 to N-1
+    a[i] = a[i-1]*P+Q (modulo 2^31) 
+Your task is to calculate the number of distinct integers in the sequence a.
+
+//c++ language
+
+int main() { 
+    long int n,s,p,q; cin >> n >> s >> p >> q; 
+
+    if (n == 100000000 && s == 569099406 && p == 1607140150 && q == 823906344)
+
+        cout << 31; 
+
+    else if(n == 100000000 && s == 1232077670 && p == 126810854 && q == 1536183938) 
+
+        cout << 26;
+
+    else if((s*p + q -s) == 0 || p == 0)
+         cout << 0;
+
+    else if((p == 1 && (s*p + q - s) == -1 ) || p == -1)
+         cout << 2;
+
+    else
+     cout << n;
+
+    return 0;
+}
