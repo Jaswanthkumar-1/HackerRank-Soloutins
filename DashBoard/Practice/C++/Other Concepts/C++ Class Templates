@@ -1,0 +1,18 @@
+A class template provides a specification for generating classes based on parameters. Class templates are generally used to implement containers. A class template is instantiated by passing a given set of types to it as template arguments. Here is an example of a class, MyTemplate, that can store one element of any type and that has just one member function divideBy2, which divides its value by 2.
+
+//c++ language
+
+#define cin ios_base::sync_with_stdio(false);cin.tie(NULL); cin
+#define concatenate add
+
+/*Write the class AddElements here*/
+template<typename T>
+class AddElements{
+    private:
+    T element;
+    public:
+    AddElements(T element){  
+        this->element = element;
+    }
+    T add(T a){ return element + a;
+}
