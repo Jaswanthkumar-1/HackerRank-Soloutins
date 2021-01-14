@@ -1,0 +1,16 @@
+One of the important topics of Object Oriented Programming is Inheritance. Inheritance allows us to define a class in terms of another class, which allows us in the reusability of the code.Check out the code below:
+
+//c++ language
+
+class Isosceles:public Triangle
+{
+public:
+    void isosceles()
+        {
+        cout<<"I am an isosceles triangle\n";
+        }
+       void description()
+        {
+        cout<<"In an isosceles triangle two sides are equal\n";
+        }
+};
