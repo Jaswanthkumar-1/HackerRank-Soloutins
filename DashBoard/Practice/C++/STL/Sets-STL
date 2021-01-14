@@ -1,0 +1,41 @@
+Sets are a part of the C++ STL. Sets are containers that store unique elements following a specific order. Here are some of the frequently used member functions of sets:
+
+Declaration:
+
+set<int>s; //Creates a set of integers.
+Size:
+
+int length=s.size(); //Gives the size of the set.
+Insert:
+
+s.insert(x); //Inserts an integer x into the set s.
+Erasing an element:
+
+s.erase(val); //Erases an integer val from the set s.
+Finding an element:
+
+//c++ language
+
+int main() {
+    int n;
+    cin >> n;
+    set<int> s;
+    for (int i = 0; i < n; i++) {
+        int type;
+        int value;
+        cin >> type >> value;
+        if (type == 1) {
+            s.insert(value);
+        } else if (type == 2) {
+            s.erase(value);
+        } else if (type == 3) {
+            auto it = s.find(value);
+            if (it != s.end()) {
+                cout << "Yes\n";
+            } else {
+                cout << "No\n";
+            }
+        }
+    }
+    return 0;
+}
