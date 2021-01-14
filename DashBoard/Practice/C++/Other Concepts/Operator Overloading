@@ -1,0 +1,29 @@
+Classes define new types in C++. Types in C++ not only interact by means of constructions and assignments but also via operators. For example:
+
+int a=2, b=1, c;
+c = b + a;
+The result of variable c will be 3.
+Similarly, classes can also perform operations using operator overloading. Operators are overloaded by means of operator functions, which are regular functions with special names. Their name begins with the operator keyword followed by the operator sign that is overloaded. The syntax is:
+
+//c++ language
+
+class Matrix 
+{
+    public:
+        vector<vector<int>> a;
+
+        Matrix() {}
+        Matrix operator+(const Matrix &o) 
+        {
+            Matrix sum(*this);
+            for (size_t i = 0; i < sum.a.size(); i++) 
+            {
+                for (size_t j = 0; j < sum.a[i].size(); j++) 
+                {
+                    sum.a[i][j] += o.a[i][j];
+                }
+            }
+            return sum;
+        }
+};
+
