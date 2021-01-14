@@ -1,0 +1,30 @@
+Objective
+
+Today, we're practicing bitwise operations. Check the attached tutorial for more details.
+
+Task
+
+We define s to be a sequence of distinct sequential integers from 1 ton ; in other words, . We want to know the maximum bitwise AND value of any two integers,  and  (where ), in sequence  that is also less than a given integer,k .
+
+Complete the function in the editor so that given  and , it returns the maximum .
+
+Note: The  symbol represents the bitwise AND operator.
+
+//javascriptcode
+
+function getMaxLessThanK(n, k) {
+    let maximum = 0;
+    let current = -1;
+    for (let i = 1; i < n; i++) 
+    {
+        for (let j = i + 1; j <= n; j++) 
+        {
+            current = i & j;
+            if (current < k && current > maximum) 
+            {
+                maximum = current;
+            }
+        }
+    }
+    return maximum;
+}
