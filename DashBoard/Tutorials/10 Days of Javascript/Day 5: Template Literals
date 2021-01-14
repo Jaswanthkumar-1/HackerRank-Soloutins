@@ -1,0 +1,24 @@
+Objective
+
+In this challenge, we practice using JavaScript Template Literals. Check the attached tutorial for more details.
+
+Task
+
+The code in the editor has a tagged template literal that passes the area and perimeter of a rectangle to a tag function named sides. Recall that the first argument of a tag function is an array of string literals from the template, and the subsequent values are the template's respective expression values.
+
+Complete the function in the editor so that it does the following:
+
+//javascriptcode
+
+function sides(literals, ...expressions) {
+    var area = expressions[0];
+    var perimeter = expressions[1];
+    
+    var s1 = (perimeter + Math.sqrt(perimeter * perimeter  - (16 * area))) / 4;
+    //console.log("s1: " + s1);
+    var s2 = (perimeter - Math.sqrt(perimeter * perimeter  - (16 * area))) / 4;
+    //console.log("s2: " + s2);
+    var array = [s1, s2];
+    array =  array.sort(function (a,b) {return a-b;});
+    return array;
+}
