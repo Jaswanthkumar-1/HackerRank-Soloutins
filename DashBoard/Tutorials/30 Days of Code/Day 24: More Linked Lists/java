@@ -1,0 +1,25 @@
+
+ public static Node removeDuplicates(Node head) {
+        // if head is null or only has 1 element
+        if( head == null || head.next == null){
+            return head;
+        }
+        
+        // if list is more than 2 elements
+        Node current = head.next;
+        Node previous = head;
+        while( current != null ){
+            // If current is a duplicate of previous
+            if( previous.data == current.data ){
+                // set previous' next pointer to skip over current node
+                previous.next = current.next;
+                // set current to next node in list, previous should not move
+                current = current.next;
+            }
+            else{ // node is not duplicate of previous
+                previous = current;
+                current = current.next;
+            }
+        }
+        return head;
+    }
