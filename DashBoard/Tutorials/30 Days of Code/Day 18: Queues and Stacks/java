@@ -1,0 +1,21 @@
+
+
+    public class Solution {
+    LinkedList s = new LinkedList();
+    LinkedList q = new LinkedList();
+
+    public void pushCharacter(char ch){
+        s.add(ch);
+    }
+
+    public void enqueueCharacter(char ch){
+        q.add(ch);
+    }
+
+    public char popCharacter(){
+        return (char) s.removeLast();
+    }
+
+    public char dequeueCharacter(){
+        return (char) q.removeFirst();
+    }
