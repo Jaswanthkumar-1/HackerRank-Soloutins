@@ -1,0 +1,64 @@
+A student signed up for  workshops and wants to attend the maximum number of workshops where no two workshops overlap. You must do the following:
+
+Implement  structures:
+
+struct Workshop having the following members:
+
+The workshop's start time.
+The workshop's duration.
+The workshop's end time.
+struct Available_Workshops having the following members:
+
+An integer,  (the number of workshops the student signed up for).
+An array of type Workshop array having size .
+
+//c++language
+
+//Define the structs Workshops and Available_Workshops.
+//Implement the functions initialize and CalculateMaxWorkshops
+
+using namespace std;
+
+    struct Workshop {
+        int start_time;
+        int duration;
+        int end_time;
+    };
+    struct Available_Workshops {
+        int n;
+        vector<Workshop> workshop;
+    };
+
+bool compare(Workshop w1, Workshop w2) {
+    return w1.end_time < w2.end_time;
+}
+
+Available_Workshops* initialize(int* start_time, int* duration, int n) {
+    Available_Workshops* aw = new Available_Workshops();
+
+    aw->n = n;
+    for (int i = 0; i != n; ++i) {
+        Workshop w;
+        w.start_time = start_time[i];
+        w.duration = duration[i];
+        w.end_time = start_time[i] + duration[i];
+        aw->workshop.push_back(w);
+    }
+
+    return aw;
+}
+
+int CalculateMaxWorkshops(Available_Workshops* ptr) {
+    int lastTime = 0;
+    int maxWorkshops = 0;
+
+    sort(ptr->workshop.begin(), ptr->workshop.end(), compare);
+    for (auto& it : ptr->workshop) {
+        if (it.start_time >= lastTime){
+            maxWorkshops++;
+            lastTime = it.end_time;
+        }
+    }
+
+    return maxWorkshops;
+}
