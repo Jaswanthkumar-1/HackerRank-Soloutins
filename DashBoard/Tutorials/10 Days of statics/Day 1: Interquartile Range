@@ -1,0 +1,153 @@
+The interquartile range of an array is the difference between its first (Q1) and third (Q3) quartiles (i.e.,Q3-Q1 ).
+Given an array,X, of n integers and an array,F, representing the respective frequencies of X's elements, construct a data set,S, where each xi occurs at frequency fi. Then calculate and print S's interquartile range, rounded to a scale of 1 decimal place (i.e., 12.3 format).
+
+c++
+
+using namespace std;
+
+double quad(vector<int> a)
+{
+    double q; int n=a.size(); 
+    
+    if(n%2==0) 
+        q = (double)(a[n/2-1] + a[n/2])/2;
+    else 
+        q = (double)a[n/2];
+    
+    return q;
+}
+
+int main() 
+{
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */  
+    
+    int n; cin>>n; vector<int> a(n), f(n);
+    
+    for(auto i=0; i<n; i++)
+        cin>>a[i];
+    
+    int sum=0;
+    for(auto i=0; i<n; i++)
+    {
+        cin>>f[i];
+        sum += f[i];
+    }
+    
+    vector<int> s(sum);
+    int idx=0;
+    for(auto i=0; i<n; i++)
+    {
+        for(auto j=0; j<f[i]; j++)
+        {
+            s[idx] = a[i];
+            idx++;
+        }
+    }
+    
+    sort(s.begin(), s.end());
+    
+    vector<int> l(s.begin(), s.begin()+sum/2);
+    vector<int> h;
+    
+    if(sum%2==0)
+    {
+        h.insert(h.end(), s.begin()+sum/2, s.end());
+    }
+    else
+    {
+        h.insert(h.end(), s.begin()+sum/2+1, s.end());
+    }
+    
+    double Q1 = quad(l);
+    
+    double Q3 = quad(h);
+    
+    printf("%.1f", (Q3-Q1));
+    
+    return 0;
+}
+
+Java8
+
+public class Solution {
+
+    public static void main(String[] args) {
+        /* Read and save input */
+        Scanner scan = new Scanner(System.in);
+        int size = scan.nextInt();
+        int [] element = new int[size];
+        int [] frequency = new int[size];
+        for (int i = 0; i < size; i++) {
+            element[i] = scan.nextInt();
+        }
+        
+        int numElements = 0;
+        for (int i = 0; i < size; i++) {
+            frequency[i] = scan.nextInt();
+            numElements += frequency[i];
+        }
+        scan.close();
+        
+        /* Create and sort our data set */
+        int [] data = new int[numElements];
+        int dataIndex = 0;
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < frequency[i]; j++) {
+                data[dataIndex] = element[i];
+                dataIndex++;
+            }
+        }
+        Arrays.sort(data);
+        
+        /* Works with both even and odd length arrays */
+        double q1 = findMedian(data, 0, data.length / 2 - 1);
+        double q3 = findMedian(data, (data.length + 1) / 2, data.length - 1);
+        
+        System.out.println(q3 - q1);
+    }
+    
+    /* Treats elements from "start" to "end" as an array and calculates its median */
+    private static double findMedian(int [] array, int start, int end) {
+        if ((end - start) % 2 == 0) { // odd number of elements
+            return (array[(end + start) / 2]);
+        } else { // even number of elements
+            int value1 = array[(end + start) / 2];
+            int value2 = array[(end + start) / 2 + 1];
+            return (value1 + value2) / 2.0;
+        }
+    }
+}
+
+python 3
+
+def median(size, values):
+    if size % 2 == 0:
+        median = (values[int(size/2)-1] + values[int(size/2)]) / 2
+    else:
+        median = float(values[int(size/2)])
+    return median
+
+# Set the data
+size = int(input())
+elements = list(map(int, input().split()))
+frequencies = list(map(int, input().split()))
+
+new_data = []
+for i in range(len(elements)):
+    for j in range(frequencies[i]):
+        new_data.append(elements[i])
+new_data = sorted(new_data)
+
+# Verify that the total data is even or odd
+size = int(len(new_data))
+if size % 2 == 0:
+    data_low = new_data[0:int(size/2)]
+    data_high = new_data[int(size/2):size]
+else:
+    data_low = new_data[0:int(size/2)]
+    data_high = new_data[int(size/2)+1:size]
+
+# Get the final result and print on the screen
+low = median(len(data_low), data_low)
+high = median(len(data_high), data_high)
+print(high - low)
