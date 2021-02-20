@@ -1,0 +1,121 @@
+Given an array,X, of n integers, calculate the respective first quartile (Q1), second quartile (Q2), and third quartile (Q3). It is guaranteed that Q1,Q12, and Q3 are integers.
+
+C++
+using namespace std;
+
+int quad(vector<int> a)
+{
+    int q, n=a.size(); 
+    
+    if(n%2==0) 
+        q = (a[n/2-1] + a[n/2])/2;
+    else 
+        q = a[n/2];
+    
+    return q;
+}
+
+int main() 
+{
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */ 
+    
+    int n; cin>>n; vector<int >a(n);
+    
+    for(auto i=0; i<n; i++)
+        cin>>a[i];
+    
+    sort(a.begin(), a.end());
+    
+    int Q1, Q2, Q3;
+    
+    Q2 = quad(a);
+    
+    vector<int> l(a.begin(), a.begin()+n/2);
+    vector<int> h;
+    
+    if(n%2==0)
+    {
+        h.insert(h.end(), a.begin()+n/2, a.end());
+    }
+    else
+    {
+        h.insert(h.end(), a.begin()+n/2+1, a.end());
+    }
+    
+    Q1 = quad(l);
+    
+    Q3 = quad(h);
+    
+    cout<<Q1<<"\n"<<Q2<<"\n"<<Q3<<"\n";
+        
+    return 0;
+}
+
+java8
+
+public class Solution {
+    
+    public static void main(String[] args) {
+        int [] array = getValues();
+        Arrays.sort(array);
+        
+        /* Works with both even and odd length arrays */
+        int q1 = findMedian(array, 0, array.length / 2 - 1);
+        int q2 = findMedian(array, 0, array.length - 1);
+        int q3 = findMedian(array, (array.length + 1) / 2, array.length - 1);
+        
+        /* Print output */
+        System.out.println(q1);
+        System.out.println(q2);
+        System.out.println(q3);
+    }
+
+    /* Treats elements from "start" to "end" as an array and calculates its median */
+    private static int findMedian(int [] array, int start, int end) {
+        if ((end - start) % 2 == 0) { // odd number of elements
+            return (array[(end + start) / 2]);
+        } else { // even number of elements
+            int value1 = array[(end + start) / 2];
+            int value2 = array[(end + start) / 2 + 1];
+            return Math.round((value1 + value2) / 2); 
+        }
+    }
+    
+    /* Creates array from input */
+    private static int [] getValues() {
+        Scanner scan = new Scanner(System.in);
+        int n = scan.nextInt();
+        int [] array = new int[n];
+        for (int i = 0; i < n; i++) {
+            array[i] = scan.nextInt();
+        }
+        scan.close();
+        return array;
+    }
+}
+
+python 3
+
+def median(size, values):
+    if size % 2 == 0:
+        median = (values[int(size/2)-1] + values[int(size/2)]) / 2
+    else:
+        median = values[int(size/2)]
+    return int(median)
+
+# Set the data
+size = int(input())
+numbers = sorted(list(map(int, input().split())))
+
+# Verify that the total data is even or odd
+if size % 2 == 0:
+    data_low = numbers[0:int(size/2)]
+    data_high = numbers[int(size/2):size]
+else:
+    data_low = numbers[0:int(size/2)]
+    data_high = numbers[int(size/2)+1:size]
+
+# Get the final result and print on the screen
+print (median(len(data_low), data_low))
+print (median(size, numbers))
+print (median(len(data_high), data_high))
