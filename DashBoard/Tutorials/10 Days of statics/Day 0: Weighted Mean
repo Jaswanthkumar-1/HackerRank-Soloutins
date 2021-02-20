@@ -1,0 +1,77 @@
+Given an array, x, of N integers and an array,W, representing the respective weights of x's elements, calculate and print the weighted mean of x's elements. Your answer should be rounded to a scale of 1 decimal place (i.e.,12.3 format).
+
+C++
+
+using namespace std;
+
+
+int main() 
+{
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */
+    
+    int n; cin>>n; int a[n+4], w;
+    double num=0.0, den=0.0;
+    
+    for(int i=0;i<n;i++) 
+        cin>>a[i];
+    
+    for(int i=0;i<n;i++) 
+    {
+        cin>>w;
+        den+=w;
+        num+=(a[i]*w);
+    }
+    
+    double wmean = (double)(num/den);
+    
+    printf("%0.1f\n", wmean);
+    
+    return 0;
+}
+
+Java8
+
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+
+        /* Read and save data */
+        Scanner scan = new Scanner(System.in);
+        int size = scan.nextInt();
+        int [] elements = new int[size];
+        int [] weights  = new int[size];
+        for (int i = 0; i < size; i++) {
+            elements[i] = scan.nextInt();
+        }
+        for (int i = 0; i < size; i++) {
+            weights[i] = scan.nextInt();
+        }
+        scan.close();
+        
+        /* Calculate weighted mean */
+        int total = 0;
+        int totalWeights = 0;
+        for (int i = 0; i < size; i++) {
+            total += elements[i] * weights[i];
+            totalWeights += weights[i];
+        }
+        
+        double weightedMean = (double) total / totalWeights;
+        System.out.format("%.1f", weightedMean);
+    }
+}
+
+python 3
+
+size = int(input())
+numbers = list(map(int, input().split()))
+weighted = list(map(int, input().split()))
+
+sum_items = 0
+for i in range(size):
+    sum_items = sum_items + (numbers[i] * weighted[i])
+
+print(round(sum_items/sum(weighted), 1))
